@@ -71,15 +71,14 @@ function eval_card(card, context)
     if context.cardarea == G.play then
          if card.seal == 'Silver' then
             G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.0,
+                trigger = 'immediate',
+                delay = 0.2,
                 func = (function()
-                        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                         local over = false
                         local edition = poll_edition('aura', nil, true, true)
                         card:set_edition(edition, true)
-                        used_tarot:juice_up(0.3, 0.5)
-                    return true end }))
+                        card:juice_up(0.3, 0.5)
+                    return true
                 end)
             }))
         end
@@ -301,14 +300,14 @@ function generate_card_ui(_c, full_UI_table, specific_vars, card_type, badges, h
 
     if _c.set == 'Spectral' then
         if _c.name == 'Clone' then
-            info_queue[#info_queue + 1] = { key = 'green_seal', set = 'Other' }
+            info_queue[#info_queue + 1] = { key = 'silver_seal', set = 'Other' }
         end
     end
 
 
     if not (_c.set == 'Edition') and badges then
         for k, v in ipairs(badges) do
-            if v == 'green_seal' then info_queue[#info_queue + 1] = { key = 'green_seal', set = 'Other' } end
+            if v == 'silver_seal' then info_queue[#info_queue + 1] = { key = 'silver_seal', set = 'Other' } end
         end
     end
 
@@ -324,8 +323,8 @@ local get_badge_colour_ref = get_badge_colour
 function get_badge_colour(key)
     local fromRef = get_badge_colour_ref(key)
 
-    if key == 'green_seal' then
-        return G.C.GREEN
+    if key == 'silver_seal' then
+        return G.C.JOKER_GREY
     end
 
     return fromRef
