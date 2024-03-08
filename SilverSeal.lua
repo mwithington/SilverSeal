@@ -28,7 +28,7 @@ function SMODS.INIT.SilverSeal()
             text = {
                 "When played copy",
                 "a random card {C:attention}enhancment",
-                "from the played hand"
+                "from the played hand."
             }
         }
     )
@@ -67,31 +67,23 @@ local calculate_seal_ref = Card.calculate_seal
 function Card:calculate_seal(context)
     local fromRef = calculate_seal_ref(self, context)
 
+    if context.played then
+      print("hello this is here")
+    end
+    -- Old code need to change
     if context.discard then
         if self.seal == 'Silver' then
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.0,
                 func = (function()
-                    if not G.GAME.round_resets.temp_handsize then
-                        G.GAME.round_resets.temp_handsize = 0
-                    end
 
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            G.hand.config.real_card_limit = (G.hand.config.real_card_limit or G.hand.config.card_limit) +
-                                1
-                            G.hand.config.card_limit = math.max(0, G.hand.config.real_card_limit)
-                            check_for_unlock({ type = 'min_hand_size' })
-                            return true
-                        end
-                    }))
-                    G.GAME.round_resets.temp_handsize = G.GAME.round_resets.temp_handsize + 1
-                    return true
+
                 end)
             }))
         end
     end
+    -- end of old code
 
     return fromRef
 end
