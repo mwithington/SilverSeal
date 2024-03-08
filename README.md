@@ -1,7 +1,8 @@
 # SilverSeal
 
-A mod for Baltro that adds in a silver seal which will copy another cards enchantment when played and scored.
-If a card has a silver seal and in hand at the end of the round it will be removed from the deck.
+A mod for Baltro that adds in a silver seal which will apply a random edition to the card.
+Once the card is played a second time a new edition will be applied. 
+The edition will only count after you have played the card atleast once.
 
 Requires [Steammodded](https://github.com/Steamopollys/Steamodded)
 
