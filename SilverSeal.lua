@@ -26,9 +26,8 @@ function SMODS.INIT.SilverSeal()
         {
             name = "Silver Seal",
             text = {
-                "When played copy",
-                "a random card {C:attention}enhancment",
-                "from the played hand."
+                "When played",
+                "apply a random {C:attention}enhancment."
             }
         }
     )
