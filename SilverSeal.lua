@@ -51,7 +51,7 @@ function SMODS.INIT.SilverSeal()
         {
             name = "Clone",
             text = {
-                "Add a {C:silver}Silver Seal{}",
+                "Add a {C:gray}Silver Seal{}",
                 "to {C:attention}1{} selected",
                 "card in your hand"
             }
@@ -62,31 +62,32 @@ function SMODS.INIT.SilverSeal()
     refresh_items()
 end
 
--- Add in the seal functionality
-local calculate_seal_ref = Card.calculate_seal
-function Card:calculate_seal(context)
-    local fromRef = calculate_seal_ref(self, context)
+-- Eval card ref
+local eval_card_ref = eval_card
 
-    if context.played then
-      print("hello this is here")
-    end
-    -- Old code need to change
-    if context.discard then
-        if self.seal == 'Silver' then
+function eval_card(card, context)
+    context = context or {}
+
+    if context.cardarea == G.play then
+         if card.seal == 'Silver' then
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.0,
                 func = (function()
-
-
+                        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+                        local over = false
+                        local edition = poll_edition('aura', nil, true, true)
+                        card:set_edition(edition, true)
+                        used_tarot:juice_up(0.3, 0.5)
+                    return true end }))
                 end)
             }))
         end
-    end
-    -- end of old code
 
-    return fromRef
+    end
+    return eval_card_ref(card, context)
 end
+
 
 -- Add the seal to be randomly generated in standard packs
 -- This is bad because we have to reimplement the seal generation logic for standard packs
