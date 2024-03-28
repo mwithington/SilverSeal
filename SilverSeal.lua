@@ -11,7 +11,7 @@ local MOD_ID = 'SilverSeal'
 
 
 function SMODS.INIT.SilverSeal()
-    _RELEASE_MODE = false
+    _RELEASE_MODE = true
 
     add_seal(
         MOD_ID,
