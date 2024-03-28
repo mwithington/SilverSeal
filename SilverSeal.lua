@@ -77,6 +77,7 @@ function eval_card(card, context)
                         local edition = poll_edition('aura', nil, true, true)
                         card:set_edition(edition, true)
                         card:juice_up(0.3, 0.5)
+                        card.seal = nil
                     return true
                 end)
             }))
